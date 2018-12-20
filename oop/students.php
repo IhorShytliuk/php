@@ -24,11 +24,18 @@ class Student{
 	}
 	
 	public function studyTime($study_time) {
-		$this->gpa = $this->gpa + log($study_time);
+		//echo $this->gpa .'+log('. $study_time . ")=". $this->gpa .'+' . log($study_time,10).PHP_EOL;
+		$this->gpa += log($study_time,10);
 	}
 }
 
-$studentList = [];
+function showStudents($studentList) {
+	foreach($studentList as $student) {
+		$student->showMyself();
+	}
+	echo PHP_EOL;
+}
+
 $students = [ 
 	['Mike', 'Barnes', 'male', 'freshman', 4],
 	['Jim', 'Nickerson', 'male', 'sophomore', 3],
@@ -37,10 +44,17 @@ $students = [
 	['Mary', 'Scott', 'female', 'senior', 2.7]
 ];
 
+$studentList = [];
 foreach($students as $student) {
 	$studentList[] = new Student($student[0], $student[1], $student[2], $student[3], $student[4]);
 }
 
-foreach($studentList as $student) {
-	$student->showMyself();
+showStudents($studentList);
+
+$newStudyTime = [60, 100, 40, 300, 1000];
+
+for($i = 0; $i < count($studentList); $i++) {
+	$studentList[$i]->studyTime($newStudyTime[$i]);
 }
+
+showStudents($studentList);
