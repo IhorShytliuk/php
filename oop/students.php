@@ -1,6 +1,6 @@
 <?php
 
-//Use your objects from above and let each one of the 5 students study for 60, 100, 40, 300, 1000 minutes, respectively. So the first student studies 60 minutes, the second studies 100 minutes, etc. After that call the showMyself methods on all 5 again and check whether their new gpa reflects how much they studied.
+//Well, now use magic methods from the link http://php.net/manual/en/language.oop5.magic.php and try to refactor your code using these methods. Imagine additional cases for your code if needed.
 
 class Student{
 	private $firstname;
@@ -17,19 +17,19 @@ class Student{
 		$this->gpa = $gpa;
 	}
 	
-	public function showMyself() {
-		echo $this->firstname . " " . $this->lastname . ", " . $this->gender  . ", " . $this->status . ", " . $this->gpa . PHP_EOL;
+	public function __toString() {
+		return $this->firstname . " " . $this->lastname . ", " . $this->gender  . ", " . $this->status . ", " . $this->gpa . PHP_EOL;
 	}
 	
 	public function studyTime($study_time) {
-		//echo $this->gpa .'+log('. $study_time . ")=". $this->gpa .'+' . log($study_time,10).PHP_EOL;
 		$this->gpa += log($study_time,10);
+		$this->gpa = round($this->gpa, 2);
 	}
 }
 
 function showStudents($studentList) {
 	foreach($studentList as $student) {
-		$student->showMyself();
+		echo $student;
 	}
 	echo PHP_EOL;
 }
